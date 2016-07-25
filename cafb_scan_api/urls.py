@@ -27,7 +27,7 @@ router.register(r'api/v1/upc', views.UPCViewSet)
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
-	url(r'^admin/', admin.site.urls),
+	# url(r'^admin/', admin.site.urls),
     url(r'^', include(router.urls)),
     url(r'^api/v1/', include('rest_framework.urls', namespace='rest_framework')),
         url(r'^scan/(?P<upc>[0-9]+)/$', views.scan_view),
