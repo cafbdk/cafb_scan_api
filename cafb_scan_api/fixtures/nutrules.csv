@@ -1,0 +1,19 @@
+category_id,nutrient,nutritional_field,rule_type,value,wellness
+3,sugar,category,contains,3,0
+4,fiber,ingredients,first_item,whole grain,1
+5,sugar,sugar,lte,7,1
+6,sodium,sodium,lte,450,1
+7,sugar,category,contains,7,1
+8,sugar,category,contains,8,0
+10,sugar,sugar,lte,15,1
+11,fiber,ingredients,first_item,whole grain,1
+14,sugar,ingredients,contains,100% juice,1
+15,sodium,sodium,lte,250,1
+21,fiber,ingredients,first_item,whole grain,1
+30,sodium,sodium,lte,140,1
+31,,name,contains,peanut butter,1
+24,fiber,ingredients,first_item,whole grain,1
+25,sugar,sugar,lte,12,1
+26,sodium,sodium,lte,250,1
+27,sodium,sodium,lte,140,1
+28,sugar,category,contains,28,1
