@@ -11,9 +11,6 @@ from django.shortcuts import render
 from bokeh.resources import CDN
 from bokeh.embed import components
 from bokeh.plotting import figure, show, output_file, vplot
-from bokeh.client import push_session
-from bokeh.io import curdoc
-from bokeh.embed import autoload_server
 from django.db.models import Count
 
 # Create your views here.
@@ -114,14 +111,13 @@ def scan_tracker(request):
 		x.append(count.values()[0])
 		factors.append(count.values()[1])
 
-	plot = figure(plot_width=800, plot_height=300, name="scans via app", y_range=factors, x_range=[0,20])
+	plot = figure(plot_width=800, plot_height=300, name="scans via app", y_range=factors, x_range=[0,50])
 	plot.segment(0, factors, x, factors, line_width=2, line_color="green", )
 	plot.circle(x, factors, size=15, fill_color="orange", line_color="green", line_width=3, )
 
-	session = push_session(curdoc())
-	context = {'script': autoload_server(plot, session_id=session.id)}
+	script, div = components(plot, CDN)
 
-	return render_to_response("scan_tracker.html", context=context)
+	return render(request, "scan_tracker.html", {"the_script": script, "the_div": div})
 
 
 
