@@ -97,7 +97,7 @@ def scan_view(request,upc):
 
 def scan_tracker(request):
     plot = figure()
-    plot.circle([1:100], [301:400], plot_width=800, plot_height=300, name="scans via app")
+    plot.circle([1,100, 105], [301,400, 405], plot_width=800, plot_height=300, name="scans via app")
 
     script, div = components(plot, CDN)
 
