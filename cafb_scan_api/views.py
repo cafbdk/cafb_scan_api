@@ -111,7 +111,7 @@ def scan_tracker(request):
 		x.append(count.values()[0])
 		factors.append(count.values()[1])
 
-	plot = figure(plot_width=800, plot_height=300, name="scans via app", y_range=factors, x_range=[0,100])
+	plot = figure(plot_width=800, plot_height=300, name="scans via app", y_range=factors, x_range=[0,20])
 	plot.segment(0, factors, x, factors, line_width=2, line_color="green", )
 	plot.circle(x, factors, size=15, fill_color="orange", line_color="green", line_width=3, )
 
