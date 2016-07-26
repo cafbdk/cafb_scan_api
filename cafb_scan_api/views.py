@@ -96,8 +96,8 @@ def scan_view(request,upc):
 	return HttpResponse(dumps(app_data, indent=4, sort_keys=True, default=lambda x:str(x)), content_type="application/json")
 
 def scan_tracker(request):
-    plot = figure()
-    plot.circle([1,100, 105], [301,400, 405], plot_width=800, plot_height=300, name="scans via app")
+    plot = figure(plot_width=800, plot_height=300, name="scans via app")
+    plot.circle([1,100, 105], [301,400, 405])
 
     script, div = components(plot, CDN)
 
