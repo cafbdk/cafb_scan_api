@@ -122,7 +122,7 @@ def scan_tracker(request):
 		x.append(source.values()[0])
 		factors.append(source.values()[1])
 
-	plot2 = figure(plot_width=800, plot_height=300, title="source for upcs", y_range=factors, x_range=[0,10])
+	plot2 = figure(plot_width=800, plot_height=300, title="source for upcs", y_range=factors, x_range=[0,100])
 	plot2.segment(0, factors, x, factors, line_width=2, line_color="green", )
 	plot2.circle(x, factors, size=15, fill_color="orange", line_color="green", line_width=3)
 
