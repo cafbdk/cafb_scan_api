@@ -111,13 +111,14 @@ def scan_tracker(request):
 		x.append(count.values()[0])
 		factors.append(count.values()[1])
 
-	plot = figure(plot_width=800, plot_height=300, name="scans via app", y_range=factors, x_range=[0,50])
+	plot = figure(plot_width=800, plot_height=300, title="scans via app", y_range=factors, x_range=[0,50])
 	plot.segment(0, factors, x, factors, line_width=2, line_color="green", )
 	plot.circle(x, factors, size=15, fill_color="orange", line_color="green", line_width=3, )
 
-	script, div = components(plot, CDN)
+	script1, div1 = components(plot, CDN)
+	script2, div2 = components(plot, CDN)
 
-	return render(request, "scan_tracker.html", {"the_script": script, "the_div": div})
+	return render(request, "scan_tracker.html", {"the_script1": script, "the_div1": div, "the_script2": script, "the_div2": div})
 
 
 
