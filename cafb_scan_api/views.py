@@ -98,7 +98,7 @@ def scan_view(request,upc):
 
 def scan_tracker(request):
 	# cats = Scan.objects.annotate(num_scans=Count('upc_raw'))
-	stats = Scan.objects.annotate(num_success=Count('scan_status'))
+	# stats = Scan.objects.annotate(num_success=Count('scan_status'))
 
 	# cat_name = range(1,32)
 	# stat_name = Scan.objects.order_by().values_list('scan_status', flat=True).distinct()
@@ -111,8 +111,8 @@ def scan_tracker(request):
 		x.append(count.values()[0])
 		factors.append(count.values()[1])
 
-    plot = figure(plot_width=800, plot_height=300, name="scans via app", y_range=factors, x_range=[0,100])
-    plot.segment(0, factors, x, factors, line_width=2, line_color="green", )
+	plot = figure(plot_width=800, plot_height=300, name="scans via app", y_range=factors, x_range=[0,100])
+	plot.segment(0, factors, x, factors, line_width=2, line_color="green", )
 	plot.circle(x, factors, size=15, fill_color="orange", line_color="green", line_width=3, )
 
     script, div = components(plot, CDN)
