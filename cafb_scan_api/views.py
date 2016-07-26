@@ -111,12 +111,24 @@ def scan_tracker(request):
 		x.append(count.values()[0])
 		factors.append(count.values()[1])
 
-	plot = figure(plot_width=800, plot_height=300, title="scans via app", y_range=factors, x_range=[0,50])
+	plot = figure(plot_width=800, plot_height=300, title="scans via app", y_range=factors, x_range=[0,20])
 	plot.segment(0, factors, x, factors, line_width=2, line_color="green", )
-	plot.circle(x, factors, size=15, fill_color="orange", line_color="green", line_width=3, )
+	plot.circle(x, factors, size=15, fill_color="orange", line_color="green", line_width=3)
+
+	x = []
+	factors = []
+	sources = UPC.objects.values('data_source').annotate(total=Count('data_source')).order_by('data_source')
+	for source in sources:
+		if source.values()[1] != 'CSV':
+			x.append(source.values()[0])
+			factors.append(source.values()[1])
+
+	plot2 = figure(plot_width=800, plot_height=300, title="source for upcs", y_range=factors, x_range=[0,10])
+	plot2.segment(0, factors, x, factors, line_width=2, line_color="green", )
+	plot2.circle(x, factors, size=15, fill_color="orange", line_color="green", line_width=3)
 
 	script1, div1 = components(plot, CDN)
-	script2, div2 = components(plot, CDN)
+	script2, div2 = components(plot2, CDN)
 
 	return render(request, "scan_tracker.html", {"the_script1": script1, "the_div1": div1, "the_script2": script2, "the_div2": div2})
 
