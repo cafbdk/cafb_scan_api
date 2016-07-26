@@ -31,5 +31,5 @@ urlpatterns = [
     url(r'^', include(router.urls)),
     url(r'^api/v1/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^scan/(?P<upc>[0-9]+)/$', views.scan_view),
-    url(r'^scan_tracker/$', scan_tracker, name="scan_tracker"),
+    url(r'^scan_tracker/$', views.scan_tracker, name="scan_tracker"),
 ]
