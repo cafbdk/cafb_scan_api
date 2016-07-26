@@ -119,9 +119,8 @@ def scan_tracker(request):
 	factors = []
 	sources = UPC.objects.values('data_source').annotate(total=Count('data_source')).order_by('data_source')
 	for source in sources:
-		if source.values()[1] != 'CSV':
-			x.append(source.values()[0])
-			factors.append(source.values()[1])
+		x.append(source.values()[0])
+		factors.append(source.values()[1])
 
 	plot2 = figure(plot_width=800, plot_height=300, title="source for upcs", y_range=factors, x_range=[0,10])
 	plot2.segment(0, factors, x, factors, line_width=2, line_color="green", )
