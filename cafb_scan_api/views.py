@@ -8,9 +8,10 @@ import os
 from json import dumps
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render
-from bokeh.plotting import figure
 from bokeh.resources import CDN
 from bokeh.embed import components
+from bokeh.plotting import figure, show, output_file, vplot
+from django.db.models import Count
 
 # Create your views here.
 
@@ -96,8 +97,23 @@ def scan_view(request,upc):
 	return HttpResponse(dumps(app_data, indent=4, sort_keys=True, default=lambda x:str(x)), content_type="application/json")
 
 def scan_tracker(request):
-    plot = figure(plot_width=800, plot_height=300, name="scans via app")
-    plot.circle([1,100, 105], [301,400, 405])
+	# cats = Scan.objects.annotate(num_scans=Count('upc_raw'))
+	stats = Scan.objects.annotate(num_success=Count('scan_status'))
+
+	# cat_name = range(1,32)
+	# stat_name = Scan.objects.order_by().values_list('scan_status', flat=True).distinct()
+
+	counts = Scan.objects.exclude(scan_status__exact='').exclude(scan_status__isnull=True).values('scan_status').annotate(total=Count('scan_status')).order_by('scan_status')
+	x = []
+	factors = []
+
+	for count in counts:
+		x.append(count.values()[0])
+		factors.append(count.values()[1])
+
+    plot = figure(plot_width=800, plot_height=300, name="scans via app", y_range=factors, x_range=[0,100])
+    plot.segment(0, factors, x, factors, line_width=2, line_color="green", )
+	plot.circle(x, factors, size=15, fill_color="orange", line_color="green", line_width=3, )
 
     script, div = components(plot, CDN)
 
