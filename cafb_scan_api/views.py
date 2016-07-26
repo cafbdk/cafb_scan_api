@@ -7,6 +7,10 @@ from cafb_scan_api.process_upc import Food
 import os
 from json import dumps
 from django.core.exceptions import ObjectDoesNotExist
+from django.shortcuts import render
+from bokeh.plotting import figure
+from bokeh.resources import CDN
+from bokeh.embed import components
 
 # Create your views here.
 
@@ -91,6 +95,13 @@ def scan_view(request,upc):
 
 	return HttpResponse(dumps(app_data, indent=4, sort_keys=True, default=lambda x:str(x)), content_type="application/json")
 
+def scan_tracker(request):
+    plot = figure()
+    plot.circle([1,2], [3,4])
+
+    script, div = components(plot, CDN)
+
+    return render(request, "scan_tracker.html", {"the_script": script, "the_div": div})
 
 
 
