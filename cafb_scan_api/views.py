@@ -115,9 +115,9 @@ def scan_tracker(request):
 	plot.segment(0, factors, x, factors, line_width=2, line_color="green", )
 	plot.circle(x, factors, size=15, fill_color="orange", line_color="green", line_width=3, )
 
-    script, div = components(plot, CDN)
+	script, div = components(plot, CDN)
 
-    return render(request, "scan_tracker.html", {"the_script": script, "the_div": div})
+	return render(request, "scan_tracker.html", {"the_script": script, "the_div": div})
 
 
 
