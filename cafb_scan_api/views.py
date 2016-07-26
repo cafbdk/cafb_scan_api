@@ -12,6 +12,8 @@ from bokeh.resources import CDN
 from bokeh.embed import components
 from bokeh.plotting import figure, show, output_file, vplot
 from bokeh.client import push_session
+from bokeh.io import curdoc
+from bokeh.embed import autoload_server
 from django.db.models import Count
 
 # Create your views here.
