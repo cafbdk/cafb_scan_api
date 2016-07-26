@@ -74,10 +74,17 @@ def scan_view(request,upc):
 	obj = Scan(upc_id_id=upc_pk, upc_raw=upc, food_cat_id_id=food_cat_pk, scan_status=item.api_response.values()[0])
 	obj.save()
 
+	if item.wellness:
+		pretty_well = 'WELLNESS'
+	elif item.wellness == 0:
+		pretty_well = 'NOT WELLNESS'
+	else:
+		pretty_well = 'o___0'
+
 	# format response for the app
 	app_data = { 
 	'product': item.food_info,
-	'wellness' : item.wellness,
+	'wellness' : pretty_well,
 	'response' : item.api_response.keys()[0],
 	'message' : item.api_response.values()[0]
 	}
