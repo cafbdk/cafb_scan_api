@@ -129,6 +129,10 @@ def scan_tracker(request):
 	script1, div1 = components(plot, CDN)
 	script2, div2 = components(plot2, CDN)
 
+	# scans by food group
+
+	# wellness vs. nonwellness 
+
 	return render(request, "scan_tracker.html", {"the_script1": script1, "the_div1": div1, "the_script2": script2, "the_div2": div2})
 
 
